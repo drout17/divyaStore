@@ -5,9 +5,7 @@ const Home = (props) =>{
     return(<>
         <div className="container-fluid">
             <div className="row">
-            {props.products.map((product,index) =>{
-                console.log(index)
-           return (<ProductCard key={index} product={product}/>)})}
+            {props.products.map((product,index) =>(<ProductCard addTocart={props.addProductToCart} key={index} product={product}/>))}
             </div>
         
         </div>

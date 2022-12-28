@@ -24,7 +24,7 @@ const UserModal = (props) => {
             </div>
         </Modal.Body>
         <Modal.Footer style={{justifyContent:"center"}}>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="info" onClick={handleClose}>
             Login
           </Button>
           <Button variant="primary" onClick={handleClose}>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../Home/Home'
 import Header from '../Header/Header';
@@ -10,12 +11,43 @@ const PRODUCT_ARRAY =[
     {id:5,name:"Product 5",price:140}];
 
 const Body = () =>{
+    let flag = true;
+    const [cartItems,setCartItems] = useState([]);
+    
+    const addProductHadler=(newProduct)=>{
+        flag=true;
+        if(cartItems!==undefined && cartItems.length!==0)
+        checkCartItem(newProduct);
+        else
+        pushProducts(newProduct);
+    }
+
+    const checkCartItem = (newProduct)=>{
+        cartItems.forEach(product => {
+            if(product.id===newProduct.id)
+            {
+                    product.count++;
+                    flag=false;
+            }
+        });
+
+        if(flag)
+        pushProducts(newProduct);
+        else
+            setCartItems(cartItems);
+    }
+
+    const pushProducts=(newProduct)=>{
+        setCartItems([...cartItems,{id:newProduct.id,price:newProduct.price,
+            name:newProduct.name,count:1}]);
+    }
+
     return(<>
-    <Header/>
+    <Header cartProducts={cartItems}/>
     <div className="p-5 text-center bg-light">
         <Routes>
-            <Route path="/" exact element={<Home products={PRODUCT_ARRAY}/>}/>
-            <Route path="/home" element={<Home products={PRODUCT_ARRAY}/>}/>
+            <Route path="/" exact element={<Home addProductToCart={addProductHadler} products={PRODUCT_ARRAY}/>}/>
+            <Route path="/home" element={<Home addProductToCart={addProductHadler} products={PRODUCT_ARRAY}/>}/>
         </Routes>
     </div>
     </>);

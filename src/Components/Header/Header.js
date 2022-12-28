@@ -1,7 +1,8 @@
 import { Link,NavLink } from "react-router-dom";
 import logo from '../../Resources/favicon.png';
+import HeaderCartButton from '../Cart/HeaderCartButton';
 
-const Header = () =>
+const Header = (props) =>
 {
 //style="background-color: cadetblue"
     return(<>
@@ -18,14 +19,18 @@ const Header = () =>
       </div>
       <div>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row-reverse">
-            <li className="nav-item px-4" style={{paddingTop: 10}}>
-            <Link style={{paddingLeft: 13, paddingTop: 10, textDecoration: 'none', color:'black'}} to="/home">Login</Link>
+            <li className="nav-item px-4" style={{paddingTop: 17}}>
+            <Link style={{paddingLeft: 13,  textDecoration: 'none', color:'black'}} to="/home">Login</Link>
             </li>
             <li>
+              <HeaderCartButton cartProducts={props.cartProducts}/>
+            </li>
+            &nbsp;
+            <li className="pt-2">
             <button type="button" className="btn btn-light form-control">Search</button>
             </li>
             &nbsp;
-            <li>
+            <li className="pt-2">
               <input className="form-control text-center" type="text" placeholder="Search"/>
           </li>
         </ul>
