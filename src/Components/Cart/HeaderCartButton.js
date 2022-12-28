@@ -6,7 +6,6 @@ const HeaderCartButton = (props) =>{
     
     const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
     const buttonClasses = `${classes.button} ${btnIsHighlighted?classes.bump:''}`;
-    console.log("Hii",props)
     return(
         <>
         <button className={buttonClasses} onClick={props.onCartClick}>

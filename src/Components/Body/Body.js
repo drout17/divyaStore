@@ -11,19 +11,22 @@ const PRODUCT_ARRAY =[
     {id:5,name:"Product 5",price:140}];
 
 const Body = () =>{
+    
+    const [cartProducts,setCartProducts] = useState([]);
+    const [products,setProducts] = useState(PRODUCT_ARRAY);
+    
     let flag = true;
-    const [cartItems,setCartItems] = useState([]);
     
     const addProductHadler=(newProduct)=>{
         flag=true;
-        if(cartItems!==undefined && cartItems.length!==0)
-        checkCartItem(newProduct);
+        if(cartProducts!==undefined && cartProducts.length!==0)
+        checkCartProducts(newProduct);
         else
         pushProducts(newProduct);
     }
 
-    const checkCartItem = (newProduct)=>{
-        cartItems.forEach(product => {
+    const checkCartProducts = (newProduct)=>{
+        cartProducts.forEach(product => {
             if(product.id===newProduct.id)
             {
                     product.count++;
@@ -34,20 +37,31 @@ const Body = () =>{
         if(flag)
         pushProducts(newProduct);
         else
-            setCartItems(cartItems);
+        setCartProducts(cartProducts);
     }
 
     const pushProducts=(newProduct)=>{
-        setCartItems([...cartItems,{id:newProduct.id,price:newProduct.price,
+        setCartProducts([...cartProducts,{id:newProduct.id,price:newProduct.price,
             name:newProduct.name,count:1}]);
     }
 
+    const seachHandler = (searchString) => {
+        let tempProducts = [];
+        PRODUCT_ARRAY.forEach(product => {
+            if(product.name.includes(searchString))
+            {
+                tempProducts.push(product)
+            }
+        });
+        setProducts(tempProducts);
+    }
+
     return(<>
-    <Header cartProducts={cartItems}/>
+    <Header cartProducts={cartProducts} search={seachHandler}/>
     <div className="p-5 text-center bg-light">
         <Routes>
-            <Route path="/" exact element={<Home addProductToCart={addProductHadler} products={PRODUCT_ARRAY}/>}/>
-            <Route path="/home" element={<Home addProductToCart={addProductHadler} products={PRODUCT_ARRAY}/>}/>
+            <Route path="/" exact element={<Home addProductToCart={addProductHadler} products={products}/>}/>
+            <Route path="/home" element={<Home addProductToCart={addProductHadler} products={products}/>}/>
         </Routes>
     </div>
     </>);
