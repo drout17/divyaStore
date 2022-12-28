@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../Home/Home'
 import Header from '../Header/Header';
+import CheckOut from '../CheckOut/CheckOut';
 
 const PRODUCT_ARRAY =[
     {id:1,name:"Product 1",price:100},
@@ -62,6 +63,8 @@ const Body = () =>{
         <Routes>
             <Route path="/" exact element={<Home addProductToCart={addProductHadler} products={products}/>}/>
             <Route path="/home" element={<Home addProductToCart={addProductHadler} products={products}/>}/>
+            <Route path="/checkout" element={<CheckOut cartProducts={cartProducts}/>}/>
+            <Route path="/*" element={<Home addProductToCart={addProductHadler} products={products}/>}/>
         </Routes>
     </div>
     </>);

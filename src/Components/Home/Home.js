@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ProductCard from "../ProductCard/ProductCard";
 
 const Home = (props) =>{
@@ -10,7 +9,6 @@ const Home = (props) =>{
             </div>
         </div>
     </>)
-
 }
 
 export default Home;
